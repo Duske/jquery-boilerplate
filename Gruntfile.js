@@ -1,5 +1,6 @@
-module.exports = function(grunt) {
-
+/*jslint vars: true */
+module.exports = function (grunt) {
+    "use strict";
 	grunt.initConfig({
 
 		// Import package manifest
@@ -8,14 +9,14 @@ module.exports = function(grunt) {
 		// Banner definitions
 		meta: {
 			banner: "/*\n" +
-				" *  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
-				" *  <%= pkg.description %>\n" +
-				" *  <%= pkg.homepage %>\n" +
-				" *\n" +
-				" *  Made by <%= pkg.author.name %>\n" +
-				" *  Under <%= pkg.licenses[0].type %> License\n" +
-				" */\n"
-		},
+                " *  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
+			     " *  <%= pkg.description %>\n" +
+			     " *  <%= pkg.homepage %>\n" +
+			     " *\n" +
+			     " *  Made by <%= pkg.author.name %>\n" +
+			     " *  Under <%= pkg.licenses[0].type %> License\n" +
+			     " */\n"
+        },
 
 		// Concat definitions
 		concat: {
@@ -47,6 +48,58 @@ module.exports = function(grunt) {
 			}
 		},
 
+		//Start server on localhost:9000 with livereload
+		connect: {
+			server: {
+				options: {
+					hostname: "localhost",
+					port: 9000,
+					base: "demo",
+					livereload: true
+				}
+			},
+			standalone : {
+				options: {
+					hostname: "localhost",
+					port: 9000,
+					base: "demo",
+					livereload: true,
+					keepalive: true
+				}
+			}
+		},
+
+    //Compiles less files for demo uses
+    less: {
+        dev: {
+          options: {
+            paths: ["demo/layout/less"]
+          },
+          files: {
+            "demo/layout/main.css": "demo/layout/less/main.less"
+          }
+        }
+    },
+
+    //Compile less files and hint js files on change + livereload
+    watch: {
+      options: {
+        livereload: true,
+      },
+      all: {
+        files: ["demo/layout/less/**/*.less", "demo/*.html", "src/**/.*js"],
+        tasks: ["jshint", "less"]
+      }
+    },
+
+		//Automatically open Google Chrome
+		open : {
+			dev : {
+				path: "http://127.0.0.1:9000/",
+				app: "Google Chrome"
+			}
+		},
+
 		// CoffeeScript compilation
 		coffee: {
 			compile: {
@@ -58,11 +111,16 @@ module.exports = function(grunt) {
 
 	});
 
-	grunt.loadNpmTasks("grunt-contrib-concat");
+	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks("grunt-contrib-connect");
+	grunt.loadNpmTasks("grunt-open");
+	grunt.loadNpmTasks("grunt-contrib-less");
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-coffee");
 
+  grunt.registerTask("server", ["connect:standalone"]);
+  grunt.registerTask("svwatch", ["connect:server","open:dev", "watch:all"]);
 	grunt.registerTask("default", ["jshint", "concat", "uglify"]);
 	grunt.registerTask("travis", ["jshint"]);
 
