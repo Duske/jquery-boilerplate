@@ -16,8 +16,9 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       { pattern: 'bower_components/jquery/dist/jquery.js', watched: false, included: true, served: true},
-    //  { pattern: 'bower_components/jasmine-jquery/lib/jasmine-jquery.js', watched: false, included: true, served: true},
-      "test/**/*.js"
+      { pattern: 'bower_components/jasmine-jquery/lib/jasmine-jquery.js', watched: false, included: true, served: true},
+      { pattern: 'test/fixtures/fixture.html', watched: false, included: true, served: true},
+      { pattern: "test/**/*.js", watched: true, served: true, included: true}
 
     ],
 
