@@ -15,9 +15,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      //dependencies
       { pattern: 'bower_components/jquery/dist/jquery.js', watched: false, included: true, served: true},
       { pattern: 'bower_components/jasmine-jquery/lib/jasmine-jquery.js', watched: false, included: true, served: true},
-      { pattern: 'test/fixtures/fixture.html', watched: false, included: true, served: true},
+      //Fixtures
+      { pattern: 'test/fixtures/fixture.html', watched: false, included: false, served: true},
+
       { pattern: "test/**/*.js", watched: true, served: true, included: true}
 
     ],
@@ -32,8 +35,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-
-    },
+  '**/*.html': []
+},
 
 
     // test results reporter to use
