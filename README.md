@@ -11,23 +11,30 @@ This project won't seek to provide a perfect solution to every possible pattern,
 
 The basic structure of the project is given in the following way:
 
-```
-├── demo/
-│   ├── index.html
-│   ├── layout
-|	 		└── less
-|			 	└── main.less
-│   └── main.css
-├── dist/
-│   ├── jquery.boilerplate.js
-│   └── jquery.boilerplate.min.js
-├── src/
-│   ├── jquery.boilerplate.coffee
-│   └── jquery.boilerplate.js
+demo/
+├── index.html
+└── layout
+    ├── img
+    │   └── grey_wash_wall.png
+    ├── less
+    │   └── main.less
+    └── main.css
+dist/
+├── jquery.boilerplate.js
+└── jquery.boilerplate.min.js
+src/
+├── jquery.boilerplate.coffee
+└── jquery.boilerplate.js
+test/
+├── fixtures
+│   └── fixture.html
+├── test.js
+├── vendor
 ├── .editorconfig
 ├── .gitignore
 ├── .jshintrc
 ├── .travis.yml
+├── karma.conf.js
 ├── boilerplate.jquery.json
 ├── Gruntfile.js
 └── package.json
