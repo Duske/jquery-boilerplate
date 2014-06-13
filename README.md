@@ -11,6 +11,7 @@ This project won't seek to provide a perfect solution to every possible pattern,
 
 The basic structure of the project is given in the following way:
 
+```
 demo/
 ├── index.html
 └── layout
