@@ -38,7 +38,7 @@
 						// and this.settings
 						// you can add more functions like the one below and
 						// call them like so: this.yourOtherFunction(this.element, this.settings).
-						console.log("xD");
+						this.element.text("test");
 				},
 				yourOtherFunction: function () {
 						// some logic
@@ -50,7 +50,7 @@
 		$.fn[ pluginName ] = function ( options ) {
 				this.each(function() {
 						if ( !$.data( this, "plugin_" + pluginName ) ) {
-								$.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+								$.data( this, "plugin_" + pluginName, new Plugin( $(this), options ) );
 						}
 				});
 
